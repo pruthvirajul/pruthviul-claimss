@@ -8,7 +8,7 @@ services:
       - "5801:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin123
+      POSTGRES_PASSWORD: admin321
       POSTGRES_DB: employee_claims_db
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -17,10 +17,10 @@ services:
       - claims-network
 
   backend:
-    build: ./Backend
+    build: ./backend
     container_name: backend-claims
     ports:
-      - "3801:3801"
+      - "3674:3674"
     depends_on:
       - postgres
     networks:
@@ -30,7 +30,7 @@ services:
     build: ./employee-side-claim
     container_name: employee-claim
     ports:
-      - "8102:80"
+      - "8112:80"
     depends_on:
       - backend
     networks:
@@ -40,7 +40,7 @@ services:
     build: ./hr-claim
     container_name: hr-claim
     ports:
-      - "8103:80"
+      - "8113:80"
     depends_on:
       - backend
     networks:
